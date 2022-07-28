@@ -22,7 +22,7 @@ class User(DB.Model):
 class Tweet(DB.Model):
     """Keeps track of Tweets for each user"""
     id = DB.Column(DB.BigInteger, primary_key=True)
-    text = DB.Column(DB.Unicode(300))  # allows for text and links
+    text = DB.Column(DB.Unicode(600))  # allows for text and links
     user_id = DB.Column(
         DB.BigInteger,
         DB.ForeignKey('user.id'),
