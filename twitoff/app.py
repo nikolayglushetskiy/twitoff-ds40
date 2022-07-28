@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 from twitoff.models import DB, User, Tweet
 from twitoff.twitter import add_or_update_user, update_all_users
 from twitoff.predict import predict_user
+from os import getenv
 
 app = Flask(__name__)
 
@@ -14,7 +15,11 @@ def create_app():
     '''
     Initializing twitoff app
     '''
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
+    # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
+    DATABASE_URL = getenv('DATABASE_URL')
+    if 'postgres:' in DATABASE_URL:
+        DATABASE_URL = DATABASE_URL.replace('postgres:', 'postgresql:')
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     DB.init_app(app)
