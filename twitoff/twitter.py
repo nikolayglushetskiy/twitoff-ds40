@@ -14,7 +14,7 @@ secret = getenv('TWITTER_API_KEY_SECRET')
 TWITTER_AUTH = tweepy.OAuthHandler(key, secret)
 TWITTER = tweepy.API(TWITTER_AUTH)
 
-nlp = spacy.load('my_model')
+nlp = spacy.load('twitoff/my_model')
 
 
 def add_or_update_user(username):
